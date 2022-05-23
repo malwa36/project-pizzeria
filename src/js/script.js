@@ -163,7 +163,18 @@
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           console.log(optionId, option);
+			
+          // NEW czy w formData istnieje właściwość o nazwie zgodnej z nazwą kategorii
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if(optionSelected){
+            if(!option.default){
+              price+=option.price;	
+            }
+          } else if(option.default) {
+            price-=option.price;
+          }
         }
+		
       } 
 
       // update calculated price in the HTML
