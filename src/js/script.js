@@ -244,14 +244,14 @@
       
       thisWidget.value = settings.amountWidget.defaultValue;
       /* Add validation */
-      if(newValue !== thisWidget.value && 
+      if(newValue !== settings.amountWidget.defaultValue && 
         !isNaN(newValue) && 
         newValue >= settings.amountWidget.defaultMin && 
         newValue <= settings.amountWidget.defaultMax) {
-        thisWidget.value = newValue;
+        settings.amountWidget.defaultValue = newValue;
       }
 
-      thisWidget.input.value = thisWidget.value;
+      thisWidget.input.value = settings.amountWidget.defaultValue;
 
       thisWidget.announce();
     }
