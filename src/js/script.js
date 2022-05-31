@@ -192,9 +192,8 @@
         }
       } 
 
-      thisProduct.priceSingle = price;
       /* multiply price by amount */
-      price *= settings.amountWidget.defaultValue;
+      price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
@@ -218,7 +217,7 @@
       // console.log('constructor argument:', element);
 
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.setValue(settings.amountWidget.defaultValue);
       thisWidget.initActions();
     }
 
@@ -234,7 +233,7 @@
     announce(){
       const thisWidget = this;
 
-      const event = new CustomEvent('updated');
+      const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
     }
 
@@ -242,19 +241,19 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
-      
-      thisWidget.value = settings.amountWidget.defaultValue;
+      // console.log(newValue);
+      // thisWidget.value = settings.amountWidget.defaultValue;
       /* Add validation */
-      if(newValue !== settings.amountWidget.defaultValue && 
+      if(newValue !== thisWidget.value && 
         !isNaN(newValue) && 
         newValue >= settings.amountWidget.defaultMin && 
         newValue <= settings.amountWidget.defaultMax) {
-        settings.amountWidget.defaultValue = newValue;
-        thisWidget.announce();
+        thisWidget.value = newValue;
       }
 
-      thisWidget.input.value = settings.amountWidget.defaultValue;
+      thisWidget.input.value = thisWidget.value;
 
+      thisWidget.announce();
     }
 
     initActions(){
@@ -266,12 +265,12 @@
 
       thisWidget.linkDecrease.addEventListener('click', function(event){
         event.preventDefault();
-        thisWidget.setValue(--thisWidget.input.value);
+        thisWidget.setValue(thisWidget.value - 1);
       });
 
       thisWidget.linkIncrease.addEventListener('click', function(event){
         event.preventDefault();
-        thisWidget.setValue(++thisWidget.input.value);
+        thisWidget.setValue(thisWidget.value + 1);
       });
     }
   }
