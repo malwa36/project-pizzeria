@@ -187,7 +187,7 @@
 		
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      // console.log('formData', formData);
 
       // set price to default price
       let price = thisProduct.data.price;
@@ -265,7 +265,7 @@
 		
       // convert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      // console.log('formData', formData);
 
       const params = {};
 
@@ -405,7 +405,7 @@
     add(menuProduct){
       const thisCart = this;
 
-      console.log('adding product', menuProduct);
+      // console.log('adding product', menuProduct);
       /* DONE generate HTML based on template */
       const generatedHTML = templates.cartProduct(menuProduct);
 
@@ -417,7 +417,7 @@
       thisCart.dom.productList.appendChild(generatedDOM);
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('thisCart.products:', thisCart.products);
+      // console.log('thisCart.products', thisCart.products);
     }
   }
 
@@ -425,15 +425,15 @@
     constructor(menuProduct, element){
       const thisCartProduct = this;
 
-    thisCartProduct.id = menuProduct.id,
-    thisCartProduct.name = menuProduct.name,
-    thisCartProduct.amount = menuProduct.amount,
-    thisCartProduct.priceSingle = menuProduct.priceSingle,
-    thisCartProduct.price = menuProduct.price,
-    thisCartProduct.params = menuProduct.params,
-	
-    thisCartProduct.getElements(element);
-    thisCartProduct.initAmountWidget();
+      thisCartProduct.id = menuProduct.id,
+      thisCartProduct.name = menuProduct.name,
+      thisCartProduct.amount = menuProduct.amount,
+      thisCartProduct.priceSingle = menuProduct.priceSingle,
+      thisCartProduct.price = menuProduct.price,
+      thisCartProduct.params = menuProduct.params,
+
+      thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget();
     }
 
     getElements(element){
@@ -446,14 +446,14 @@
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
-	}
+    }
 
     initAmountWidget(){
       const thisCartProduct = this;
     
-      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidget);
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
       
-      thisCartProduct.amountWidget.addEventListener('updated', function(){
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
@@ -479,11 +479,11 @@
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
+      /* console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
       console.log('classNames:', classNames);
       console.log('settings:', settings);
-      console.log('templates:', templates);
+      console.log('templates:', templates); */
 
       thisApp.initData();
       thisApp.initMenu();
