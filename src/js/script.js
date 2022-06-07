@@ -315,7 +315,7 @@
       // console.log('constructor argument:', element);
 
       thisWidget.getElements(element);
-      thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
       thisWidget.initActions();
     }
 
