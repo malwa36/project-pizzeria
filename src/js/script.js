@@ -235,7 +235,7 @@
       price *= thisProduct.amountWidget.value;
 
       /* add new property "priceSingle" to thisProduct */
-      thisProduct.priceSingle = price;
+      thisProduct.priceSingle = price / thisProduct.amountWidget.value;
       thisProduct.price = price;
 
       // update calculated price in the HTML
